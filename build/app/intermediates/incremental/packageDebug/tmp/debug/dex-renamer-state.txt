@@ -1,0 +1,4 @@
+#Thu Oct 12 13:38:24 ICT 2023
+base.0=C\:\\Elmer Works\\private\\on_the_spot\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

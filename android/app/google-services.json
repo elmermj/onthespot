@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "975990056168",
+    "project_id": "onthespot-d5f33",
+    "storage_bucket": "onthespot-d5f33.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975990056168:android:ffd2ef7e8d2e027fef555d",
+        "android_client_info": {
+          "package_name": "com.example.on_the_spot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqe9l4qaYu7ltp-eki1mm92EPbJbsx1j4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
