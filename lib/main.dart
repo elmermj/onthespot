@@ -1,40 +1,41 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:on_the_spot/blocs/auth/login/login_bloc.dart';
-import 'package:on_the_spot/blocs/auth/register/register_bloc.dart';
-import 'package:on_the_spot/blocs/home/home_bloc.dart';
-import 'package:on_the_spot/firebase_options.dart';
-import 'package:on_the_spot/network/repository/repository_store.dart';
-import 'package:on_the_spot/views/welcome/welcome_screen.dart';
+import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:on_the_spot/constants/color_scheme.g.dart';
+import 'package:on_the_spot/modules/auth/auth_controller.dart';
+import 'package:on_the_spot/modules/auth/auth_screen.dart';
+import 'package:on_the_spot/modules/home/home_screen.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
-  runApp(const MyApp());
+  final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final AuthController authController = Get.put(AuthController());
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<LoginBloc>(
-            create: (_) => LoginBloc(authRepo: RepositoryStore.authRepository)),
-        BlocProvider<RegisterBloc>(
-            create: (context) =>
-                RegisterBloc(authRepo: RepositoryStore.authRepository)),
-        BlocProvider<HomeBloc>(
-            create: (context) =>
-                HomeBloc(homeRepo: RepositoryStore.homeRepository)),
-      ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: WelcomeScreen(),
+    return GetMaterialApp(
+      theme: ThemeData(
+        colorScheme: lightColorScheme
+      ),
+      darkTheme: ThemeData(
+        colorScheme: darkColorScheme
+      ),
+      home: Obx(
+        () {
+          if (authController.isLoggedIn.value) {
+            return const HomeScreen();
+          } else {
+            return const AuthScreen();
+          }
+        },
       ),
     );
   }
