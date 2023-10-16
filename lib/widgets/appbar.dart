@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:on_the_spot/constants/color_scheme.g.dart';
 
 class OTSAppBar extends StatelessWidget implements PreferredSizeWidget {
   const OTSAppBar({super.key});
@@ -15,6 +14,5 @@ class OTSAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
   
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

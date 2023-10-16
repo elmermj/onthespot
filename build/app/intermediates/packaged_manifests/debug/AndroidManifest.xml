@@ -20,7 +20,8 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="on_the_spot" >
+        android:label="on_the_spot"
+        android:usesCleartextTraffic="true" >
         <activity
             android:name="com.example.on_the_spot.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

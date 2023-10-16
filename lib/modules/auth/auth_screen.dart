@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 import 'package:on_the_spot/constants/color_scheme.g.dart';
 import 'package:on_the_spot/constants/variables.dart';
 import 'package:on_the_spot/modules/auth/auth_controller.dart';
-import 'package:on_the_spot/modules/home/home_screen.dart';
+import 'package:on_the_spot/modules/auth/widgets/login_form.dart';
+import 'package:on_the_spot/modules/auth/widgets/register_form.dart';
 
 class AuthScreen extends GetView<AuthController> {
-  const AuthScreen({super.key});
+  AuthScreen({super.key});
+  @override
+  final AuthController controller = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,64 +25,15 @@ class AuthScreen extends GetView<AuthController> {
           ),
           Align(
             alignment: const AlignmentDirectional(0, 0.2),
-            child: Container(
-              width: 300,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: lightColorScheme.primary.withOpacity(0.4),
-              ),
-              padding: const EdgeInsets.all(12),
-              child: Form(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextFormField(
-                      controller: controller.emailController,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        fillColor: Color.fromRGBO(213, 213, 213, 1),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromRGBO(235, 235, 235, 0.4),
-                            width: 0.1
-                          )
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromRGBO(235, 235, 235, 0.4),
-                            width: 0.1
-                          )
-                        )
-                      ),
-                    ),
-                    const SizedBox(height: 12,),
-                    TextFormField(
-                      controller: controller.passwordController,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        fillColor: Color.fromRGBO(255, 0, 0, 1),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromRGBO(235, 235, 235, 0.4),
-                            width: 0.1,
-                          )
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromRGBO(235, 235, 235, 0.4),
-                            width: 0.1
-                          )
-                        )
-                      )
-                    ),
-                    const SizedBox(height: 12,),
-                    TextButton(
-                      onPressed: ()=>Get.off(()=>const HomeScreen()), 
-                      child: Text("Login", style: TextStyle(color: lightColorScheme.secondary),),
-                    )
-                  ]
-                )
+            child: Obx(
+              ()=> Container(
+                width: 300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: lightColorScheme.primary.withOpacity(0.4),
+                ),
+                padding: const EdgeInsets.all(12),
+                child: controller.isLoginForm.value? LoginForm(controller: controller): RegisterForm(controller: controller),
               ),
             ),
           )

@@ -31,9 +31,9 @@ class MyApp extends StatelessWidget {
       home: Obx(
         () {
           if (authController.isLoggedIn.value) {
-            return const HomeScreen();
+            return HomeScreen();
           } else {
-            return const AuthScreen();
+            return AuthScreen();
           }
         },
       ),
